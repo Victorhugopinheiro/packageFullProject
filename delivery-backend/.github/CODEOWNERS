@@ -1,0 +1,7 @@
+# Replace these placeholders with real GitHub usernames.
+# Example: @victor and @my-backend-teammate
+
+* @your-github-username
+/src/** @your-backend-reviewer
+/prisma/** @your-backend-reviewer
+/.github/** @your-github-username

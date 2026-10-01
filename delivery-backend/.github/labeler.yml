@@ -1,0 +1,32 @@
+auth:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/routes/user/auth.ts
+          - src/controller/user/auth/**
+          - src/service/user/auth/**
+          - src/lib/jwt.ts
+          - src/lib/tokenHash.ts
+
+security:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/lib/jwt.ts
+          - src/lib/tokenHash.ts
+          - src/middleware/requireAuth.ts
+          - src/service/user/auth/**
+
+backend:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/**
+
+refactor:
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/controller/**
+          - src/service/**
+
+database:
+  - changed-files:
+      - any-glob-to-any-file:
+          - prisma/**

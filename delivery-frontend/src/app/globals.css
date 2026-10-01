@@ -1,0 +1,137 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* brand palette */
+  --palette-900: #03045e;
+  --palette-700: #0077b6;
+  --palette-500: #00b4d8;
+  --palette-300: #90e0ef;
+  --palette-100: #caf0f8;
+
+  --background: #ffffff;
+  --foreground: var(--palette-900);
+  --card: #ffffff;
+  --card-foreground: var(--palette-900);
+  --popover: #ffffff;
+  --popover-foreground: var(--palette-900);
+  --primary: var(--palette-700);
+  --primary-foreground: #ffffff;
+  --secondary: var(--palette-300);
+  --secondary-foreground: var(--palette-900);
+  --muted: var(--palette-100);
+  --muted-foreground: var(--palette-700);
+  --accent: var(--palette-500);
+  --accent-foreground: var(--palette-900);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: var(--palette-100);
+  --input: var(--palette-100);
+  --ring: var(--palette-500);
+  --chart-1: var(--palette-900);
+  --chart-2: var(--palette-700);
+  --chart-3: var(--palette-500);
+  --chart-4: var(--palette-300);
+  --chart-5: var(--palette-100);
+  --radius: 0.625rem;
+  --sidebar: var(--palette-900);
+  --sidebar-foreground: var(--palette-100);
+  --sidebar-primary: var(--palette-500);
+  --sidebar-primary-foreground: var(--palette-900);
+  --sidebar-accent: var(--palette-700);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: color-mix(in oklab, var(--palette-100) 15%, transparent);
+  --sidebar-ring: var(--palette-500);
+}
+
+.dark {
+  --background: var(--palette-900);
+  --foreground: var(--palette-100);
+  --card: color-mix(in oklab, var(--palette-900) 85%, var(--palette-700) 15%);
+  --card-foreground: var(--palette-100);
+  --popover: color-mix(in oklab, var(--palette-900) 85%, var(--palette-700) 15%);
+  --popover-foreground: var(--palette-100);
+  --primary: var(--palette-500);
+  --primary-foreground: var(--palette-900);
+  --secondary: var(--palette-700);
+  --secondary-foreground: var(--palette-100);
+  --muted: color-mix(in oklab, var(--palette-900) 70%, var(--palette-700) 30%);
+  --muted-foreground: var(--palette-300);
+  --accent: var(--palette-700);
+  --accent-foreground: var(--palette-100);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: color-mix(in oklab, var(--palette-100) 15%, transparent);
+  --input: color-mix(in oklab, var(--palette-100) 20%, transparent);
+  --ring: var(--palette-500);
+  --chart-1: var(--palette-900);
+  --chart-2: var(--palette-700);
+  --chart-3: var(--palette-500);
+  --chart-4: var(--palette-300);
+  --chart-5: var(--palette-100);
+  --sidebar: var(--palette-900);
+  --sidebar-foreground: var(--palette-100);
+  --sidebar-primary: var(--palette-500);
+  --sidebar-primary-foreground: var(--palette-900);
+  --sidebar-accent: color-mix(in oklab, var(--palette-900) 70%, var(--palette-700) 30%);
+  --sidebar-accent-foreground: var(--palette-100);
+  --sidebar-border: color-mix(in oklab, var(--palette-100) 12%, transparent);
+  --sidebar-ring: var(--palette-500);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

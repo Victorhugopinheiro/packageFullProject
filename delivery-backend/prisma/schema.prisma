@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  WORKER
+}
+
+model User {
+  id              String           @id @default(cuid())
+  name            String
+  email           String           @unique
+  password        String
+  role            Role             @default(ADMIN)
+  refreshSessions RefreshSession[]
+  workerProfile   WorkerProfile?
+  managedWorkers  WorkerProfile[]  @relation("AdminWorkers")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model WorkerProfile {
+  userId          String           @id
+  user            User             @relation(fields: [userId], references: [id])
+  adminId         String
+  admin           User             @relation("AdminWorkers", fields: [adminId], references: [id])
+  phone           String?
+  pricePerPackage Float
+  image           String?
+  address         String?
+  deliveryRecords DeliveryRecord[]
+
+  @@index([adminId])
+}
+
+model RefreshSession {
+  id                  String   @id @default(cuid())
+  userId              String
+  tokenHash           String   @unique
+  expiresAt           DateTime
+  revokedAt           DateTime?
+  replacedBySessionId String?
+  createdAt           DateTime @default(now())
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model DeliveryRecord {
+  id          String   @id @default(cuid())
+  workerId    String
+  worker      WorkerProfile     @relation(fields: [workerId], references: [userId])
+  date        DateTime
+  quantity    Int
+  createdAt   DateTime @default(now())
+  totalAmount Float
+
+  @@index([workerId, date])
+}

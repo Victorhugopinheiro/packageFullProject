@@ -1,0 +1,56 @@
+name: Auto Label PR
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  ensure-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure common labels exist
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: 'auth', color: '0e8a16', description: 'Authentication related changes' },
+              { name: 'security', color: 'd73a4a', description: 'Security sensitive changes' },
+              { name: 'backend', color: '1d76db', description: 'Backend changes' },
+              { name: 'refactor', color: 'c2e0c6', description: 'Code refactor or restructuring' },
+              { name: 'database', color: '5319e7', description: 'Database and Prisma changes' }
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                });
+              } catch (error) {
+                if (error.status === 404) {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ...label,
+                  });
+                } else {
+                  throw error;
+                }
+              }
+            }
+
+  labeler:
+    needs: ensure-labels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply labels based on changed files
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
