@@ -12,7 +12,7 @@ RUN npm ci
 
 # Copy source code and compile
 COPY . .
-RUN DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy" npm run build
+RUN npm run build
 
 # Optional: Remove devDependencies to save disk space
 
