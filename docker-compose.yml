@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
     # Coolify will inject the environment variables at runtime
     # but for local testing, uncomment the line below:
-    #env_file: ./delivery-backend/.env
+    env_file: ./delivery-backend/.env
     
     networks:
       - app-network
