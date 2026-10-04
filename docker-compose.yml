@@ -17,17 +17,18 @@ services:
     # Coolify will inject the environment variables at runtime
     # but for local testing, uncomment the line below:
     #env_file: ./delivery-backend/.env
-    
+
     networks:
       - app-network
 
   nginx:
-    image: nginx:alpine
+    build:
+      context: ./nginx
     restart: unless-stopped
     expose:
       - "80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    #volumes:
+    # - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - frontend
       - backend
