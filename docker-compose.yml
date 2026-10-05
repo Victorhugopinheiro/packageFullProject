@@ -4,8 +4,8 @@ services:
       context: ./delivery-frontend
       dockerfile: Dockerfile
     restart: unless-stopped
-    environment:
-      - INTERNAL_API_URL=http://nginx:80
+    expose:
+    - "3000"
     networks:
       - app-network
 
@@ -14,6 +14,8 @@ services:
       context: ./delivery-backend
       dockerfile: Dockerfile
     restart: unless-stopped
+    expose:
+    - "5000"
     # Coolify will inject the environment variables at runtime
     # but for local testing, uncomment the line below:
     #env_file: ./delivery-backend/.env
