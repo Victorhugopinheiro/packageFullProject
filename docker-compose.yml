@@ -5,7 +5,10 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     expose:
-    - "3000"
+      - "3000"
+    environment:
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
     networks:
       - app-network
 
@@ -15,7 +18,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     expose:
-    - "5000"
+      - "5000"
     # Coolify will inject the environment variables at runtime
     # but for local testing, uncomment the line below:
     #env_file: ./delivery-backend/.env
